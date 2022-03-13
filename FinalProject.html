@@ -128,10 +128,11 @@
 								<label for="validationCustom04" class="form-label"
 									>Courses</label
 								>
-								<select class="form-select" id="validationCustom04" required>
-									<option selected disabled value="">Choose...</option>
-									<option>...</option>
-								</select>
+								<select
+									class="form-select"
+									id="validationCustom04"
+									required
+								></select>
 								<div class="invalid-feedback">Please select a valid course</div>
 							</div>
 							<div class="col-md-3">
@@ -176,66 +177,75 @@
 		crossorigin="anonymous"
 	></script>
 	<script>
-				// Radio Buttons Function
-				let formElements = document.getElementsByTagName("ul")[0];
-				let radioBtns = document.querySelectorAll("input[type=radio]");
+		// Radio Buttons Function
+		let formElements = document.getElementsByTagName("select")[0];
+		let radioBtns = document.querySelectorAll("input[type=radio]");
 
-				let Filler = (ArrayName) => {
-					formElements.innerHTML = "";
-					for (let value of ArrayName) {
-						let listElement = document.createElement("li");
-						listElement.innerHTML = value;
-						formElements.appendChild(listElement);
-					}
-				};
+		let englishCourses = ["ESL", "TOEFL", "IELTS"];
+		let careersCourses = [
+			"Web Development: WD",
+			"User Interface: UI",
+			"User Experience: UX",
+			"Hospitality Management: HM",
+			"Digital Marketing: DM",
+		];
 
-				for (let i = 0; i < radioBtns.length; i++) {
-					radioBtns[i].addEventListener("click", (event) => {
-						let listElement = "";
-						switch (event.target.value) {
-							case "car":
-								Filler(cars);
-								break;
-							case "food":
-								Filler(foods);
-								break;
+		let Filler = (ArrayName) => {
+			formElements.innerHTML = "";
+			for (let value of ArrayName) {
+				let listElement = document.createElement("option");
+				listElement.innerHTML = value;
+				formElements.appendChild(listElement);
+			}
+		};
+
+		for (let i = 0; i < radioBtns.length; i++) {
+			radioBtns[i].addEventListener("click", (event) => {
+				let listElement = "";
+				switch (event.target.value) {
+					case "english":
+						Filler(englishCourses);
+						break;
+					case "careers":
+						Filler(careersCourses);
+						break;
+				}
+			});
+		}
+
+		(function () {
+			// Fetch all the forms with custom Bootstrap validation styles
+			let forms = document.querySelectorAll(".needs-validation");
+
+			// Loop over them and prevent submission if any field is not filled correctly
+			Array.prototype.slice.call(forms).forEach(function (form) {
+				form.addEventListener(
+					"submit",
+					function (event) {
+						if (!form.checkValidity()) {
+							event.preventDefault();
 						}
-					});
-				}
+						form.classList.add("was-validated");
+					},
+					false
+				);
+			});
+		})();
 
-				(function () {
-					// Fetch all the forms with custom Bootstrap validation styles
-					let forms = document.querySelectorAll(".needs-validation");
+		// Successful Login function
+		function alert(message, type) {
+			let wrapper = document.createElement("div");
+			wrapper.innerHTML =
+				'<div class="alert alert-' +
+				type +
+				' alert-dismissible" role="alert">' +
+				message +
+				'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 
-					// Loop over them and prevent submission if any field is not filled correctly
-					Array.prototype.slice.call(forms).forEach(function (form) {
-						form.addEventListener(
-							"submit",
-							function (event) {
-								if (!form.checkValidity()) {
-									event.preventDefault();
-								}
-								form.classList.add("was-validated");
-							},
-							false
-						);
-					});
-		// 		})();
-		// asdfasdfsadfsafdafjjdsakjfasdjkfasdjkhdfashkjadsfufuoieqhiufewhuiahuioauioh
-				// Successful Login function
-				function alert(message, type) {
-					let wrapper = document.createElement("div");
-					wrapper.innerHTML =
-						'<div class="alert alert-' +
-						type +
-						' alert-dismissible" role="alert">' +
-						message +
-						'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
-
-					alertPlaceholder.append(wrapper);
-				}
-				if (alertTrigger) {
-					alert("You logged in successfully!", "success");
-				}
+			alertPlaceholder.append(wrapper);
+		}
+		if (alertTrigger) {
+			alert("You logged in successfully!", "success");
+		}
 	</script>
 </html>
