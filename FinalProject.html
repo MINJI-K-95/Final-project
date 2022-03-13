@@ -22,7 +22,7 @@
 		<title>Final Project</title>
 		<style>
 			.modal-dialog {
-				max-width: 50%;
+				max-width: 60%;
 			}
 		</style>
 	</head>
@@ -100,11 +100,13 @@
 									<div class="invalid-feedback">Please choose a username</div>
 								</div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-2">
+								<label for="radiobtns" class="form-label">Pathways</label>
 								<div class="form-check">
 									<input
 										class="form-check-input"
 										type="radio"
+										id="radiobtns"
 										name="flexRadioDefault"
 										value="english"
 									/>
@@ -118,6 +120,7 @@
 										type="radio"
 										name="flexRadioDefault"
 										value="careers"
+										checked
 									/>
 									<label class="form-check-label" for="flexRadioDefault2">
 										Careers Courses
@@ -136,14 +139,17 @@
 								<div class="invalid-feedback">Please select a valid course</div>
 							</div>
 							<div class="col-md-3">
-								<label for="validationCustom05" class="form-label">Zip</label>
-								<input
-									type="text"
-									class="form-control"
-									id="validationCustom05"
+								<label for="validationCustom05" class="form-label"
+									>Subject</label
+								>
+								<select
+									class="form-select"
+									id="validationCustom04"
 									required
-								/>
-								<div class="invalid-feedback">Please provide a valid zip</div>
+								></select>
+								<div class="invalid-feedback">
+									Please select a valid subject
+								</div>
 							</div>
 							<div class="col-12">
 								<div class="form-check">
@@ -183,15 +189,17 @@
 
 		let englishCourses = ["ESL", "TOEFL", "IELTS"];
 		let careersCourses = [
-			"Web Development: WD",
-			"User Interface: UI",
-			"User Experience: UX",
-			"Hospitality Management: HM",
-			"Digital Marketing: DM",
+			"Web Development / WD",
+			"User Interface / UI",
+			"User Experience / UX",
+			"Hospitality Management / HM",
+			"Digital Marketing / DM",
 		];
 
 		let Filler = (ArrayName) => {
 			formElements.innerHTML = "";
+			formElements.innerHTML =
+				"<option selected disabled value=''>Choose...</option>";
 			for (let value of ArrayName) {
 				let listElement = document.createElement("option");
 				listElement.innerHTML = value;
