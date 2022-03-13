@@ -19,6 +19,9 @@
 			crossorigin="anonymous"
 		/>
 
+		<!-- jQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 		<title>Final Project</title>
 		<style>
 			.modal-dialog {
@@ -128,25 +131,13 @@
 								</div>
 							</div>
 							<div class="col-md-3">
-								<label for="validationCustom04" class="form-label"
-									>Courses</label
-								>
-								<select
-									class="form-select"
-									id="validationCustom04"
-									required
-								></select>
+								<label for="course" class="form-label">Courses</label>
+								<select class="form-select" id="course" required></select>
 								<div class="invalid-feedback">Please select a valid course</div>
 							</div>
 							<div class="col-md-3">
-								<label for="validationCustom05" class="form-label"
-									>Subject</label
-								>
-								<select
-									class="form-select"
-									id="validationCustom04"
-									required
-								></select>
+								<label for="subject" class="form-label">Subject</label>
+								<select class="form-select" id="subject" required></select>
 								<div class="invalid-feedback">
 									Please select a valid subject
 								</div>
@@ -183,39 +174,107 @@
 		crossorigin="anonymous"
 	></script>
 	<script>
+		// Options Arrays
+		let englishCourses = {
+			ESL: [
+				"1: ESL Reading & Writing",
+				"2: ESL Listening & Speaking",
+				"3: ESL Experiential Learning",
+			],
+			TOEFL: ["1: Listening", "2: Reading", "3: Writing", "4: Speaking"],
+			IELTS: [
+				"1: TTSP Reading and Listening",
+				"2: TTSP Speaking",
+				"3: TTSP Writing",
+			],
+		};
+
+		let careersCourses = {
+			Web_Development_WD: [
+				"1: Fundamentals of Front End Web Development and HTML",
+				"2: Fundamentals of CSS, Preprocessors, Frameworks, & Version Control Systems",
+				"3: JavaScript for Web Developers 1",
+				"4: JavaScript for Web Developers 2",
+				"5: Introduction to Back-End Web Development: PHP",
+				"6: Introduction to Content Management Systems with WordPress",
+			],
+			User_Interface_UI: [
+				"1: Fundamentals of Web Development",
+				"2: Introduction to UI Design",
+				"3: Visual Design for UI",
+				"4: Design Tools for UI",
+				"5: Digital Marketing for UI",
+				"6: Career Preparation for UI",
+			],
+			User_Experience_UX: [
+				"1: Fundamentals of UX",
+				"2: Fundamentals for UX Design",
+				"3: Visual Design for UX",
+				"4: Design Tools for UX",
+				"5: Introduction to Quality Assurance for UX",
+				"6: Preparing UX Professionals for the Workplace",
+			],
+			Hospitality_Management_HM: [
+				"1: Cross Cultural Communication",
+				"2: Customer Service, Sales and Marketing",
+				"3: Professional Development in Tourism & Hospitality",
+				"4: Project Management",
+				"5: Sustainable Tourism",
+				"6: Business Ethics",
+			],
+			Digital_Marketing_DM: [
+				"1: Introduction to Marketing",
+				"2: Digital Marketing Fundamentals",
+				"3: Marketing Channels—Paid Channels",
+				"4: Strategic Web Design",
+				"5: Marketing Technology & Automation",
+				"6: Marketing Channels—Content is King",
+			],
+		};
+
 		// Radio Buttons Function
-		let formElements = document.getElementsByTagName("select")[0];
 		let radioBtns = document.querySelectorAll("input[type=radio]");
 
-		let englishCourses = ["ESL", "TOEFL", "IELTS"];
-		let careersCourses = [
-			"Web Development / WD",
-			"User Interface / UI",
-			"User Experience / UX",
-			"Hospitality Management / HM",
-			"Digital Marketing / DM",
-		];
-
-		let Filler = (ArrayName) => {
-			formElements.innerHTML = "";
-			formElements.innerHTML =
-				"<option selected disabled value=''>Choose...</option>";
-			for (let value of ArrayName) {
-				let listElement = document.createElement("option");
-				listElement.innerHTML = value;
-				formElements.appendChild(listElement);
-			}
+		// Function that will populate the select
+		let populateSelect = (id, values, targetObj) => {
+			let $select = $(id);
+			$select.empty();
+			values.forEach(function (value) {
+				let $option = $("<option value='" + value + "'>" + value + "</option>");
+				$select.append($option);
+			});
+			$("#course").on("change", function () {
+				let key = $(this).val();
+				populateSelect("#subject", targetObj[key]);
+			});
 		};
 
 		for (let i = 0; i < radioBtns.length; i++) {
 			radioBtns[i].addEventListener("click", (event) => {
-				let listElement = "";
 				switch (event.target.value) {
 					case "english":
-						Filler(englishCourses);
+						populateSelect(
+							"#course",
+							Object.keys(englishCourses),
+							englishCourses
+						);
+						populateSelect(
+							"#subject",
+							englishCourses[$("#course").val()],
+							englishCourses
+						);
 						break;
 					case "careers":
-						Filler(careersCourses);
+						populateSelect(
+							"#course",
+							Object.keys(careersCourses),
+							careersCourses
+						);
+						populateSelect(
+							"#subject",
+							careersCourses[$("#course").val()],
+							careersCourses
+						);
 						break;
 				}
 			});
@@ -241,19 +300,19 @@
 		})();
 
 		// Successful Login function
-		function alert(message, type) {
-			let wrapper = document.createElement("div");
-			wrapper.innerHTML =
-				'<div class="alert alert-' +
-				type +
-				' alert-dismissible" role="alert">' +
-				message +
-				'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+		// function alert(message, type) {
+		// 	let wrapper = document.createElement("div");
+		// 	wrapper.innerHTML =
+		// 		'<div class="alert alert-' +
+		// 		type +
+		// 		' alert-dismissible" role="alert">' +
+		// 		message +
+		// 		'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 
-			alertPlaceholder.append(wrapper);
-		}
-		if (alertTrigger) {
-			alert("You logged in successfully!", "success");
-		}
+		// 	alertPlaceholder.append(wrapper);
+		// }
+		// if (alertTrigger) {
+		// 	alert("You logged in successfully!", "success");
+		// }
 	</script>
 </html>
