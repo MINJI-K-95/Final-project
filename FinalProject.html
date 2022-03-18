@@ -135,13 +135,6 @@
 								<select class="form-select" id="course" required></select>
 								<div class="invalid-feedback">Please select a valid course</div>
 							</div>
-							<div class="col-md-4">
-								<label for="subject" class="form-label">Subject</label>
-								<select class="form-select" id="subject" required></select>
-								<div class="invalid-feedback">
-									Please select a valid subject
-								</div>
-							</div>
 							<div class="col-12">
 								<div class="form-check">
 									<input
@@ -174,7 +167,7 @@
 		crossorigin="anonymous"
 	></script>
 	<script>
-//test 
+		//test
 
 		// Options Arrays
 		let englishCourses = {
@@ -192,7 +185,7 @@
 		};
 
 		let careersCourses = {
-			Web_Development_WD: [
+			"Web Development / WD": [
 				"1: Fundamentals of Front End Web Development and HTML",
 				"2: Fundamentals of CSS, Preprocessors, Frameworks, & Version Control Systems",
 				"3: JavaScript for Web Developers 1",
@@ -200,7 +193,7 @@
 				"5: Introduction to Back-End Web Development: PHP",
 				"6: Introduction to Content Management Systems with WordPress",
 			],
-			User_Interface_UI: [
+			"User Interface / UI": [
 				"1: Fundamentals of Web Development",
 				"2: Introduction to UI Design",
 				"3: Visual Design for UI",
@@ -208,7 +201,7 @@
 				"5: Digital Marketing for UI",
 				"6: Career Preparation for UI",
 			],
-			User_Experience_UX: [
+			"User Experience / UX": [
 				"1: Fundamentals of UX",
 				"2: Fundamentals for UX Design",
 				"3: Visual Design for UX",
@@ -216,7 +209,7 @@
 				"5: Introduction to Quality Assurance for UX",
 				"6: Preparing UX Professionals for the Workplace",
 			],
-			Hospitality_Management_HM: [
+			"Hospitality Management / HM": [
 				"1: Cross Cultural Communication",
 				"2: Customer Service, Sales and Marketing",
 				"3: Professional Development in Tourism & Hospitality",
@@ -224,7 +217,7 @@
 				"5: Sustainable Tourism",
 				"6: Business Ethics",
 			],
-			Digital_Marketing_DM: [
+			"Digital Marketing / DM": [
 				"1: Introduction to Marketing",
 				"2: Digital Marketing Fundamentals",
 				"3: Marketing Channels—Paid Channels",
@@ -238,16 +231,12 @@
 		let radioBtns = document.querySelectorAll("input[type=radio]");
 
 		// Function that will populate the select
-		let populateSelect = (id, values, targetObj) => {
+		let populateSelect = (id, values) => {
 			let $select = $(id);
 			$select.empty();
 			values.forEach(function (value) {
 				let $option = $("<option value='" + value + "'>" + value + "</option>");
 				$select.append($option);
-			});
-			$("#course").on("change", function () {
-				let key = $(this).val();
-				populateSelect("#subject", targetObj[key]);
 			});
 		};
 
@@ -255,28 +244,10 @@
 			radioBtns[i].addEventListener("click", (event) => {
 				switch (event.target.value) {
 					case "english":
-						populateSelect(
-							"#course",
-							Object.keys(englishCourses),
-							englishCourses
-						);
-						populateSelect(
-							"#subject",
-							englishCourses[$("#course").val()],
-							englishCourses
-						);
+						populateSelect("#course", Object.keys(englishCourses));
 						break;
 					case "careers":
-						populateSelect(
-							"#course",
-							Object.keys(careersCourses),
-							careersCourses
-						);
-						populateSelect(
-							"#subject",
-							careersCourses[$("#course").val()],
-							careersCourses
-						);
+						populateSelect("#course", Object.keys(careersCourses));
 						break;
 				}
 			});
