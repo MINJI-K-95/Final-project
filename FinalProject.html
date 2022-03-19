@@ -167,65 +167,64 @@
 		crossorigin="anonymous"
 	></script>
 	<script>
-
 		//test
 
 		// Options Arrays
 		let englishCourses = {
-			ESL: [
-				"1: ESL Reading & Writing",
-				"2: ESL Listening & Speaking",
-				"3: ESL Experiential Learning",
-			],
-			TOEFL: ["1: Listening", "2: Reading", "3: Writing", "4: Speaking"],
-			IELTS: [
-				"1: TTSP Reading and Listening",
-				"2: TTSP Speaking",
-				"3: TTSP Writing",
-			],
+			ESL: {
+				1: "ESL Reading & Writing",
+				2: "ESL Listening & Speaking",
+				3: "ESL Experiential Learning",
+			},
+			TOEFL: { 1: "Listening", 2: "Reading", 3: "Writing", 4: "Speaking" },
+			IELTS: {
+				1: "TTSP Reading and Listening",
+				2: "TTSP Speaking",
+				3: "TTSP Writing",
+			},
 		};
 
 		let careersCourses = {
-			"Web Development / WD": [
-				"1: Fundamentals of Front End Web Development and HTML",
-				"2: Fundamentals of CSS, Preprocessors, Frameworks, & Version Control Systems",
-				"3: JavaScript for Web Developers 1",
-				"4: JavaScript for Web Developers 2",
-				"5: Introduction to Back-End Web Development: PHP",
-				"6: Introduction to Content Management Systems with WordPress",
-			],
-			"User Interface / UI": [
-				"1: Fundamentals of Web Development",
-				"2: Introduction to UI Design",
-				"3: Visual Design for UI",
-				"4: Design Tools for UI",
-				"5: Digital Marketing for UI",
-				"6: Career Preparation for UI",
-			],
-			"User Experience / UX": [
-				"1: Fundamentals of UX",
-				"2: Fundamentals for UX Design",
-				"3: Visual Design for UX",
-				"4: Design Tools for UX",
-				"5: Introduction to Quality Assurance for UX",
-				"6: Preparing UX Professionals for the Workplace",
-			],
-			"Hospitality Management / HM": [
-				"1: Cross Cultural Communication",
-				"2: Customer Service, Sales and Marketing",
-				"3: Professional Development in Tourism & Hospitality",
-				"4: Project Management",
-				"5: Sustainable Tourism",
-				"6: Business Ethics",
-			],
-			"Digital Marketing / DM": [
-				"1: Introduction to Marketing",
-				"2: Digital Marketing Fundamentals",
-				"3: Marketing Channels—Paid Channels",
-				"4: Strategic Web Design",
-				"5: Marketing Technology & Automation",
-				"6: Marketing Channels—Content is King",
-			],
+			"Web Development / WD": {
+				1: "Fundamentals of Front End Web Development and HTML",
+				2: "Fundamentals of CSS, Preprocessors, Frameworks, & Version Control Systems",
+				3: "JavaScript for Web Developers 1",
+				4: "JavaScript for Web Developers 2",
+				5: "Introduction to Back-End Web Development: PHP",
+				6: "Introduction to Content Management Systems with WordPress",
+			},
+			"User Interface / UI": {
+				1: "Fundamentals of Web Development",
+				2: "Introduction to UI Design",
+				3: "Visual Design for UI",
+				4: "Design Tools for UI",
+				5: "Digital Marketing for UI",
+				6: "Career Preparation for UI",
+			},
+			"User Experience / UX": {
+				1: "Fundamentals of UX",
+				2: "Fundamentals for UX Design",
+				3: "Visual Design for UX",
+				4: "Design Tools for UX",
+				5: "Introduction to Quality Assurance for UX",
+				6: "Preparing UX Professionals for the Workplace",
+			},
+			"Hospitality Management / HM": {
+				1: "Cross Cultural Communication",
+				2: "Customer Service, Sales and Marketing",
+				3: "Professional Development in Tourism & Hospitality",
+				4: "Project Management",
+				5: "Sustainable Tourism",
+				6: "Business Ethics",
+			},
+			"Digital Marketing / DM": {
+				1: "Introduction to Marketing",
+				2: "Digital Marketing Fundamentals",
+				3: "Marketing Channels—Paid Channels",
+				4: "Strategic Web Design",
+				5: "Marketing Technology & Automation",
+				6: "Marketing Channels—Content is King",
+			},
 		};
 
 		// Radio Buttons Function
@@ -273,20 +272,113 @@
 			});
 		})();
 
-		// Successful Login function
-		// function alert(message, type) {
-		// 	let wrapper = document.createElement("div");
-		// 	wrapper.innerHTML =
-		// 		'<div class="alert alert-' +
-		// 		type +
-		// 		' alert-dismissible" role="alert">' +
-		// 		message +
-		// 		'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+		// Parent Class
+		class Student {
+			constructor(
+				studentId,
+				firstName,
+				lastName,
+				email,
+				pathway,
+				courses,
+				gpa
+			) {
+				this.studentId = studentId;
+				this.firstName = firstName;
+				this.lastName = lastName;
+				this.email = email;
+				this.pathway = pathway;
+				this.courses = courses;
+				this.gpa = gpa;
+			}
+			get StudentId() {
+				return this.studentId;
+			}
+			set StudentId(newStudentId) {
+				this.studentId = newStudentId;
+			}
+			get FirstName() {
+				return this.firstName;
+			}
+			set FirstName(newFirstName) {
+				this.firstName = newFirstName;
+			}
+			get LastName() {
+				return this.lastName;
+			}
+			set LastName(newLastName) {
+				this.lastName = newLastName;
+			}
+			get Email() {
+				return this.email;
+			}
+			set Email(newEmail) {
+				this.email = newEmail;
+			}
+			get Pathway() {
+				return this.pathway;
+			}
+			set Pathway(newPathway) {
+				this.email = newPathway;
+			}
+			get Courses() {
+				return this.courses;
+			}
+			set Courses(newCourses) {
+				this.courses = newCourses;
+			}
+			get GPA() {
+				return this.gpa;
+			}
+			set GPA(newGPA) {
+				this.gpa = newGPA;
+			}
+		}
 
-		// 	alertPlaceholder.append(wrapper);
-		// }
-		// if (alertTrigger) {
-		// 	alert("You logged in successfully!", "success");
-		// }
+		// Child Classes
+		class ESL_Student extends Student {
+			constructor(
+				studentId,
+				firstName,
+				lastName,
+				email,
+				pathway,
+				courses,
+				activeCourse,
+				gpa
+			) {
+				super(studentId, firstName, lastName, email, pathway, courses, gpa);
+				this.activeCourse = activeCourse;
+			}
+			get ActiveCourse() {
+				return this.activeCourse;
+			}
+			set ActiveCourse(newActiveCourse) {
+				this.activeCourse = newActiveCourse;
+			}
+		}
+
+		class Careers_Student extends Student {
+			constructor(
+				studentId,
+				firstName,
+				lastName,
+				email,
+				pathway,
+				courses,
+				activeCourse,
+				gpa
+			) {
+				super(studentId, firstName, lastName, email, pathway, courses, gpa);
+				this.activeCourse = activeCourse;
+			}
+			get ActiveCourse() {
+				return this.activeCourse;
+			}
+			set ActiveCourse(newActiveCourse) {
+				this.activeCourse = newActiveCourse;
+			}
+		}
+		 
 	</script>
 </html>
