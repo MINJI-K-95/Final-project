@@ -30,20 +30,30 @@
 		</style>
 	</head>
 	<body>
-		<!-- Button trigger modal -->
+		<!-- Button trigger modal (Register) -->
 		<button
 			type="button"
 			class="btn btn-primary"
 			data-bs-toggle="modal"
-			data-bs-target="#exampleModal"
+			data-bs-target="#register"
 		>
 			Register
 		</button>
 
-		<!-- Modal -->
+		<!-- Button trigger modal (Login) -->
+		<button
+			type="button"
+			class="btn btn-primary"
+			data-bs-toggle="modal"
+			data-bs-target="#login"
+		>
+			Login
+		</button>
+
+		<!-- Modal (Registration) -->
 		<div
 			class="modal fade"
-			id="exampleModal"
+			id="register"
 			tabindex="-1"
 			aria-labelledby="exampleModalLabel"
 			aria-hidden="true"
@@ -51,7 +61,9 @@
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Registration</h5>
+						<h5 class="modal-title" id="exampleModalLabel">
+							Registration (Teachers)
+						</h5>
 						<button
 							type="button"
 							class="btn-close"
@@ -61,40 +73,53 @@
 					</div>
 					<div class="modal-body">
 						<form class="row g-3 needs-validation" novalidate>
-							<div class="col-md-6">
-								<label for="validationCustom01" class="form-label"
-									>First name</label
-								>
+							<div class="col-md-4">
+								<label for="student_id" class="form-label">Student ID</label>
 								<input
 									type="text"
 									class="form-control"
-									id="validationCustom01"
-									value="Mark"
+									id="student_id"
+									value=""
 									required
 								/>
-								<div class="valid-feedback">Looks good!</div>
+								<div class="invalid-feedback">
+									Please type the student ID number
+								</div>
 							</div>
-							<div class="col-md-6">
-								<label for="validationCustom02" class="form-label"
-									>Last name</label
-								>
+							<div class="col-md-4">
+								<label for="fname" class="form-label">First name</label>
 								<input
 									type="text"
 									class="form-control"
-									id="validationCustom02"
-									value="Otto"
+									id="fname"
+									value=""
 									required
 								/>
-								<div class="valid-feedback">Looks good!</div>
+								<div class="invalid-feedback">
+									Provide the student's first name
+								</div>
+							</div>
+							<div class="col-md-4">
+								<label for="lname" class="form-label">Last name</label>
+								<input
+									type="text"
+									class="form-control"
+									id="lname"
+									value=""
+									required
+								/>
+								<div class="invalid-feedback">
+									Provide the student's last name
+								</div>
 							</div>
 							<div class="col-md-6">
-								<label for="validationEmail" class="form-label">E-mail</label>
+								<label for="email" class="form-label">E-mail</label>
 								<div class="input-group has-validation">
 									<span class="input-group-text" id="inputGroupPrepend">@</span>
 									<input
 										type="email"
 										class="form-control"
-										id="validationEmail"
+										id="email"
 										aria-describedby="inputGroupPrepend"
 										required
 									/>
@@ -102,54 +127,128 @@
 								</div>
 							</div>
 							<div class="col-md-6">
-								<label for="validationPassword" class="form-label"
-									>Password</label
-								>
+								<label for="password" class="form-label">Password</label>
 								<div class="input-group has-validation">
 									<input
 										type="password"
 										class="form-control"
-										id="validationPassword"
+										id="password"
+										aria-describedby="inputGroupPrepend"
+										required
+									/>
+									<div class="invalid-feedback">Please type a password</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div id="radioButtons">
+									<label for="radioButtons" class="form-label">Pathways</label>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="radio"
+											id="validationFormCheck1"
+											value="english"
+											name="radio-stacked"
+											required
+										/>
+										<label class="form-check-label" for="validationFormCheck1">
+											English Courses
+										</label>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="radio"
+											id="validationFormCheck2"
+											value="careers"
+											name="radio-stacked"
+											required
+										/>
+										<label class="form-check-label" for="validationFormCheck2">
+											Careers Courses
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<label for="course" class="form-label">Courses</label>
+								<select class="form-select" id="course" required></select>
+								<div class="invalid-feedback">Please select a valid course</div>
+							</div>
+							<div class="col-md-4">
+								<label for="course_gpa" class="form-label">Course GPA</label>
+								<input
+									type="text"
+									class="form-control"
+									id="course_gpa"
+									value=""
+									required
+								/>
+								<div class="invalid-feedback">Please assign a GPA</div>
+							</div>
+							<div class="col-12">
+								<button class="btn btn-primary" type="submit" id="submitbtn">
+									Submit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal (Login) -->
+		<div
+			class="modal fade"
+			id="login"
+			tabindex="-1"
+			aria-labelledby="exampleModalLabel"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Login (Students)</h5>
+						<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="modal"
+							aria-label="Close"
+						></button>
+					</div>
+					<div class="modal-body">
+						<form class="row g-3 needs-validation" novalidate>
+							<div class="col-md-12">
+								<label for="email2" class="form-label">E-mail</label>
+								<div class="input-group has-validation">
+									<span class="input-group-text" id="inputGroupPrepend">@</span>
+									<input
+										type="email"
+										class="form-control"
+										id="email2"
 										aria-describedby="inputGroupPrepend"
 										required
 									/>
 									<div class="invalid-feedback">Please type a valid email</div>
 								</div>
 							</div>
-							<div class="col-md-4">
-								<label for="radiobtns" class="form-label">Pathways</label>
-								<div class="form-check">
+							<div class="col-md-12">
+								<label for="password2" class="form-label">Password</label>
+								<div class="input-group has-validation">
 									<input
-										class="form-check-input"
-										type="radio"
-										id="radiobtns"
-										name="flexRadioDefault"
-										value="english"
+										type="password"
+										class="form-control"
+										id="password2"
+										aria-describedby="inputGroupPrepend"
+										required
 									/>
-									<label class="form-check-label" for="flexRadioDefault1">
-										English Courses
-									</label>
+									<div class="invalid-feedback">Please type a password</div>
 								</div>
-								<div class="form-check">
-									<input
-										class="form-check-input"
-										type="radio"
-										name="flexRadioDefault"
-										value="careers"
-										checked
-									/>
-									<label class="form-check-label" for="flexRadioDefault2">
-										Careers Courses
-									</label>
-								</div>
-							</div>
-							<div class="col-md-8">
-								<label for="course" class="form-label">Courses</label>
-								<select class="form-select" id="course" required></select>
-								<div class="invalid-feedback">Please select a valid course</div>
 							</div>
 							<div class="col-12">
-								<button class="btn btn-primary" type="submit">Submit</button>
+								<button class="btn btn-primary" type="submit" id="submitbtn">
+									Login
+								</button>
 							</div>
 						</form>
 					</div>
@@ -163,8 +262,6 @@
 		crossorigin="anonymous"
 	></script>
 	<script>
-		//test
-
 		// Options Arrays
 		let englishCourses = {
 			ESL: {
