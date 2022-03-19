@@ -25,7 +25,7 @@
 		<title>Final Project</title>
 		<style>
 			.modal-dialog {
-				max-width: 60%;
+				max-width: 40%;
 			}
 		</style>
 	</head>
@@ -61,7 +61,7 @@
 					</div>
 					<div class="modal-body">
 						<form class="row g-3 needs-validation" novalidate>
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<label for="validationCustom01" class="form-label"
 									>First name</label
 								>
@@ -74,7 +74,7 @@
 								/>
 								<div class="valid-feedback">Looks good!</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<label for="validationCustom02" class="form-label"
 									>Last name</label
 								>
@@ -87,16 +87,29 @@
 								/>
 								<div class="valid-feedback">Looks good!</div>
 							</div>
-							<div class="col-md-4">
-								<label for="validationCustomUsername" class="form-label"
-									>E-mail</label
-								>
+							<div class="col-md-6">
+								<label for="validationEmail" class="form-label">E-mail</label>
 								<div class="input-group has-validation">
 									<span class="input-group-text" id="inputGroupPrepend">@</span>
 									<input
 										type="email"
 										class="form-control"
-										id="validationCustomUsername"
+										id="validationEmail"
+										aria-describedby="inputGroupPrepend"
+										required
+									/>
+									<div class="invalid-feedback">Please type a valid email</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<label for="validationPassword" class="form-label"
+									>Password</label
+								>
+								<div class="input-group has-validation">
+									<input
+										type="password"
+										class="form-control"
+										id="validationPassword"
 										aria-describedby="inputGroupPrepend"
 										required
 									/>
@@ -130,27 +143,10 @@
 									</label>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-8">
 								<label for="course" class="form-label">Courses</label>
 								<select class="form-select" id="course" required></select>
 								<div class="invalid-feedback">Please select a valid course</div>
-							</div>
-							<div class="col-12">
-								<div class="form-check">
-									<input
-										class="form-check-input"
-										type="checkbox"
-										value=""
-										id="invalidCheck"
-										required
-									/>
-									<label class="form-check-label" for="invalidCheck">
-										Agree to terms and conditions
-									</label>
-									<div class="invalid-feedback">
-										You must agree before submitting.
-									</div>
-								</div>
 							</div>
 							<div class="col-12">
 								<button class="btn btn-primary" type="submit">Submit</button>
@@ -379,6 +375,5 @@
 				this.activeCourse = newActiveCourse;
 			}
 		}
-		 
 	</script>
 </html>
