@@ -27,29 +27,51 @@
 			.modal-dialog {
 				max-width: 40%;
 			}
+			h1 {
+				font-size: 5rem;
+			}
 		</style>
 	</head>
 	<body>
-		<!-- Button trigger modal (Register) -->
-		<button
-			type="button"
-			class="btn btn-primary"
-			data-bs-toggle="modal"
-			data-bs-target="#register"
-		>
-			Register
-		</button>
+		<nav class="navbar navbar-light px-2" style="background-color: #e3f2fd">
+			<form class="form-inline">
+				<!-- Button trigger modal (Register) -->
+				<button
+					type="button"
+					class="btn btn-primary"
+					data-bs-toggle="modal"
+					data-bs-target="#register"
+				>
+					Register
+				</button>
 
-		<!-- Button trigger modal (Login) -->
-		<button
-			type="button"
-			class="btn btn-primary"
-			data-bs-toggle="modal"
-			data-bs-target="#login"
-		>
-			Login
-		</button>
+				<!-- Button trigger modal (Login) -->
+				<button
+					type="button"
+					class="btn btn-primary"
+					data-bs-toggle="modal"
+					data-bs-target="#login"
+				>
+					Login
+				</button>
+			</form>
+			<span class="navbar-text"> Education System Sample </span>
+		</nav>
 
+		<div class="container-fluid h-custom">
+			<div class="row d-flex justify-content-center align-items-center h-100">
+				<div class="col-md-9 col-lg-6 col-xl-5">
+					<img
+						src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+						class="img-fluid"
+						alt="Sample image"
+					/>
+				</div>
+				<div class="col-md-8 col-lg-6 col-xl-4">
+					<h1>Education<br />System<br />Sample</h1>
+				</div>
+			</div>
+		</div>
 		<!-- Modal (Registration) -->
 		<div
 			class="modal fade"
@@ -147,7 +169,7 @@
 											class="form-check-input"
 											type="radio"
 											id="validationFormCheck1"
-											value="english"
+											value="English"
 											name="radio-stacked"
 											required
 										/>
@@ -160,7 +182,7 @@
 											class="form-check-input"
 											type="radio"
 											id="validationFormCheck2"
-											value="careers"
+											value="Careers"
 											name="radio-stacked"
 											required
 										/>
@@ -187,7 +209,7 @@
 								<div class="invalid-feedback">Please assign a GPA</div>
 							</div>
 							<div class="col-12">
-								<button class="btn btn-primary" type="submit" id="submitbtn">
+								<button class="btn btn-primary" type="button" id="submitbtn">
 									Submit
 								</button>
 							</div>
@@ -219,17 +241,16 @@
 					<div class="modal-body">
 						<form class="row g-3 needs-validation" novalidate>
 							<div class="col-md-12">
-								<label for="email2" class="form-label">E-mail</label>
-								<div class="input-group has-validation">
-									<span class="input-group-text" id="inputGroupPrepend">@</span>
-									<input
-										type="email"
-										class="form-control"
-										id="email2"
-										aria-describedby="inputGroupPrepend"
-										required
-									/>
-									<div class="invalid-feedback">Please type a valid email</div>
+								<label for="student_id" class="form-label">Student ID</label>
+								<input
+									type="text"
+									class="form-control"
+									id="student_id2"
+									value=""
+									required
+								/>
+								<div class="invalid-feedback">
+									Please type the student ID number
 								</div>
 							</div>
 							<div class="col-md-12">
@@ -246,7 +267,12 @@
 								</div>
 							</div>
 							<div class="col-12">
-								<button class="btn btn-primary" type="submit" id="submitbtn">
+								<button
+									class="btn btn-primary"
+									type="button"
+									disabled="disabled"
+									id="loginbtn"
+								>
 									Login
 								</button>
 							</div>
@@ -262,7 +288,7 @@
 		crossorigin="anonymous"
 	></script>
 	<script>
-		// Options Arrays
+		// Courses Objects
 		let englishCourses = {
 			ESL: {
 				1: "ESL Reading & Writing",
@@ -336,34 +362,19 @@
 		for (let i = 0; i < radioBtns.length; i++) {
 			radioBtns[i].addEventListener("click", (event) => {
 				switch (event.target.value) {
-					case "english":
+					case "English":
 						populateSelect("#course", Object.keys(englishCourses));
 						break;
-					case "careers":
+					case "Careers":
 						populateSelect("#course", Object.keys(careersCourses));
 						break;
 				}
 			});
 		}
 
-		(function () {
-			// Fetch all the forms with custom Bootstrap validation styles
-			let forms = document.querySelectorAll(".needs-validation");
-
-			// Loop over them and prevent submission if any field is not filled correctly
-			Array.prototype.slice.call(forms).forEach(function (form) {
-				form.addEventListener(
-					"submit",
-					function (event) {
-						if (!form.checkValidity()) {
-							event.preventDefault();
-						}
-						form.classList.add("was-validated");
-					},
-					false
-				);
-			});
-		})();
+		// -- ---------------------------------------------------------------
+		// --  CLASSES
+		// -- ---------------------------------------------------------------
 
 		// Parent Class
 		class Student {
@@ -372,6 +383,7 @@
 				firstName,
 				lastName,
 				email,
+				password,
 				pathway,
 				courses,
 				gpa
@@ -380,6 +392,7 @@
 				this.firstName = firstName;
 				this.lastName = lastName;
 				this.email = email;
+				this.password = password;
 				this.pathway = pathway;
 				this.courses = courses;
 				this.gpa = gpa;
@@ -408,6 +421,12 @@
 			set Email(newEmail) {
 				this.email = newEmail;
 			}
+			get Password() {
+				return this.email;
+			}
+			set Password(newPassword) {
+				this.password = newPassword;
+			}
 			get Pathway() {
 				return this.pathway;
 			}
@@ -435,12 +454,22 @@
 				firstName,
 				lastName,
 				email,
+				password,
 				pathway,
 				courses,
 				activeCourse,
 				gpa
 			) {
-				super(studentId, firstName, lastName, email, pathway, courses, gpa);
+				super(
+					studentId,
+					firstName,
+					lastName,
+					email,
+					password,
+					pathway,
+					courses,
+					gpa
+				);
 				this.activeCourse = activeCourse;
 			}
 			get ActiveCourse() {
@@ -449,6 +478,18 @@
 			set ActiveCourse(newActiveCourse) {
 				this.activeCourse = newActiveCourse;
 			}
+			Student_Info = () => {
+				return (
+					"Name: " +
+					this.FirstName +
+					" " +
+					this.LastName +
+					"\nActive Course: " +
+					this.ActiveCourse +
+					"\nGPA: " +
+					this.GPA
+				);
+			};
 		}
 
 		class Careers_Student extends Student {
@@ -457,12 +498,22 @@
 				firstName,
 				lastName,
 				email,
+				password,
 				pathway,
 				courses,
 				activeCourse,
 				gpa
 			) {
-				super(studentId, firstName, lastName, email, pathway, courses, gpa);
+				super(
+					studentId,
+					firstName,
+					lastName,
+					email,
+					password,
+					pathway,
+					courses,
+					gpa
+				);
 				this.activeCourse = activeCourse;
 			}
 			get ActiveCourse() {
@@ -471,6 +522,186 @@
 			set ActiveCourse(newActiveCourse) {
 				this.activeCourse = newActiveCourse;
 			}
+			Student_Info() {
+				return (
+					"Name: " +
+					this.FirstName +
+					" " +
+					this.LastName +
+					"\nActive Course: " +
+					this.ActiveCourse +
+					"\nGPA: " +
+					this.GPA
+				);
+			}
 		}
+
+		// -- ---------------------------------------------------------------
+		// --  VALIDATION AND SUBMIT (REGISTRATION & LOGIN)
+		// -- ---------------------------------------------------------------
+
+		// Map object
+		let studentsMap = new Map();
+
+		// Fetch all the forms with custom Bootstrap validation styles
+		let forms = $(".needs-validation");
+
+		// Fields validation
+		(function () {
+			// Loop over them and prevent submission if any field is not filled correctly
+			Array.prototype.slice.call(forms).forEach(function (form) {
+				form.addEventListener(
+					"change",
+					function (event) {
+						if (!form.checkValidity()) {
+							event.preventDefault();
+						}
+						form.classList.add("was-validated");
+					},
+					false
+				);
+			});
+		})();
+
+		// -------------------- REGISTRATION ---------------------- //
+
+		// Keypress restrictions
+
+		// Student ID
+		$("#student_id").keypress((event) => {
+			if (!(event.keyCode >= 48 && event.keyCode <= 57)) {
+				event.preventDefault();
+			}
+		});
+
+		// First and Last names
+		$("#fname").keypress((event) => {
+			if (
+				!(
+					(event.keyCode >= 65 && event.keyCode <= 90) ||
+					(event.keyCode >= 97 && event.keyCode <= 122)
+				)
+			) {
+				event.preventDefault();
+			}
+		});
+
+		$("#lname").keypress((event) => {
+			if (
+				!(
+					(event.keyCode >= 65 && event.keyCode <= 90) ||
+					(event.keyCode >= 97 && event.keyCode <= 122)
+				)
+			) {
+				event.preventDefault();
+			}
+		});
+
+		// Student GPA
+		$("#course_gpa").keypress((event) => {
+			if (
+				!((event.keyCode >= 48 && event.keyCode <= 57) || event.keyCode == 46)
+			) {
+				event.preventDefault();
+			}
+		});
+
+		// Submit button (disable or enable)
+		$(function () {
+			$("#submitbtn").attr("disabled", true);
+			$("form").change(function () {
+				if (
+					$("#student_id").val() != "" &&
+					$("#fname").val() != "" &&
+					$("#lname").val() != "" &&
+					$("#email").val() != "" &&
+					$("#password").val() != "" &&
+					$("input[type='radio']").val() != "" &&
+					$("#course").val() != "" &&
+					$("#course_gpa").val() != ""
+				) {
+					$("#submitbtn").attr("disabled", false);
+				} else {
+					$("#submitbtn").attr("disabled", true);
+				}
+			});
+		});
+
+		// Click event for the 'Submit' button
+		$("#submitbtn").click(() => {
+			let stu_id = $("#student_id").val();
+			let first_name = $("#fname").val();
+			let last_name = $("#lname").val();
+			let email_field = $("#email").val();
+			let pass_field = $("#password").val();
+			let radioValue = $("input[type='radio']:checked").val();
+			let course_field = $("#course").val();
+			let active_gpa = $("#course_gpa");
+
+			if (radioValue == "English") {
+				single_student = new ESL_Student(
+					stu_id,
+					first_name,
+					last_name,
+					email_field,
+					pass_field,
+					radioValue,
+					englishCourses,
+					course_field,
+					active_gpa
+				);
+			} else if (radioValue == "Careers") {
+				single_student = new Careers_Student(
+					stu_id,
+					first_name,
+					last_name,
+					email_field,
+					pass_field,
+					radioValue,
+					careersCourses,
+					course_field,
+					active_gpa
+				);
+			}
+			studentsMap.set(stu_id, single_student);
+			console.log(studentsMap);
+			alert("Student has been registered!");
+			$("form").each(function () {
+				this.reset();
+			});
+			$("#submitbtn").attr("disabled", true);
+			$("form").removeClass("was-validated");
+		});
+
+		// -------------------- LOGIN ---------------------- //
+
+		// Student ID (Keypress restriction)
+		$("#student_id2").keypress((event) => {
+			if (!(event.keyCode >= 48 && event.keyCode <= 57)) {
+				event.preventDefault();
+			}
+		});
+
+		// Login button (disable or enable)
+		$(function () {
+			$("#loginbtn").attr("disabled", true);
+			$("form").change(function () {
+				if ($("#student_id2").val() != "" && $("#password2").val() != "") {
+					$("#loginbtn").attr("disabled", false);
+				} else {
+					$("#loginbtn").attr("disabled", true);
+				}
+			});
+		});
+
+		let Show_Info = (id) => {
+			let findStudent = studentsMap.get(id);
+			findStudent.Student_Info();
+		};
+
+		$("#loginbtn").click(() => {
+			let stu_id2 = $("#student_id2").val();
+			alert(Show_Info(parseInt(stu_id2)));
+		});
 	</script>
 </html>
